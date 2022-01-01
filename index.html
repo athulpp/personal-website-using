@@ -522,7 +522,7 @@
                         </div>
                         <div id="errormsg1"> </div>
                         <div class="form-group mt-3">
-                          <input type="number" class="form-control" name="subject" id="number" placeholder="phone number" onkeyup="mobileValidate()">
+                          <input type="" class="form-control" name="mob" id="number" placeholder="phone number" onkeyup="mobileValidate()">
                         </div>
                         <div id="errormsg2"> </div>
                         <div class="form-group mt-3">
@@ -556,7 +556,7 @@
                     </div>
                     <div class="socials">
                       <ul>
-                        <li><a href="https://www.facebook.com/athul.puthiyapurayil.1"><span class="ico-circle"><i class="bi bi-facebook"></i></span></a></li>
+                        <li><a href="https://www.facebook.com/athul.puthiyapurayil.1" target="_blank"><span class="ico-circle"><i class="bi bi-facebook"></i></span></a></li>
                         <li><a href="https://www.instagram.com/athul_pp_/?r=nametag"><span class="ico-circle"><i class="bi bi-instagram"></i></span></a></li>
                         <li><a href="https://mobile.twitter.com/Athul92202411"><span class="ico-circle"><i class="bi bi-twitter"></i></span></a></li>
                         <li><a href="https://www.linkedin.com/in/athul-p-p-299580192"><span class="ico-circle"><i class="bi bi-linkedin"></i></span></a></li>
@@ -625,7 +625,7 @@ if(nameValidate()==true && emailValidate()==true && mobileValidate()==true && me
 
 function nameValidate(){
   var varname = $('#name').val();
-  var pattern = /[a-zA-Z\s]+/;
+  var pattern = /[a-zA-Z]+$/;
 
   if(varname==" "){
     $('#errormsg').html("Name is mandatory");
@@ -660,18 +660,20 @@ function mobileValidate(){
   var varMobile = $('#number').val();
   var mobilePattern = /^\d{10}$/;
 
-  if(varMobile==""){
-    $('#errormsg2').html("Contact number is mandatory");
-    return false;
-  }else if(varMobile.match(mobilePattern)){
-    $('#errormsg2').html("");
-    return true;
-  }
-  else if(varMobile.length<10 ||varMobile.length>=10){
+  // if(varMobile==""){
+  //   $('#errormsg2').html("Contact number is mandatory");
+  //   return false;
+  // }else if(varMobile.match(mobilePattern)){
+  //   $('#errormsg2').html("");
+  //   return true;
+  // }
+  // else 
+  if(varMobile.length<10 ||varMobile.length>10){
     $('#errormsg2').html("Number should be 10 digits");
+  
   }
   else{
-    $('#errormsg2').html("Enter valid Contact number");
+    $('#errormsg2').html("");
     return false;
   }
 }
@@ -687,6 +689,12 @@ function messageValidate(){
     return true;
   }
 }
+$('input[name="mob"]').keyup(function (e) {
+  if (/\D/g.test(this.value)) {
+    // Filter non-digits from input value.
+    this.value = this.value.replace(/\D/g, "");
+  }
+});
 </script>
 </body>
 
